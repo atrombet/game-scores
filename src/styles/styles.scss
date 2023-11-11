@@ -1,0 +1,38 @@
+// Variables
+@import './_variables.scss';
+
+// HTML style overrides
+@import './_typography.scss';
+@import './_input.scss';
+@import './_button.scss';
+@import './_link.scss';
+
+// Utility classes
+@import './_utilities.scss';
+
+html {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+}
+
+// Custom component styles
+@import './_page.scss';
+@import './_login.scss';
+@import './_icon.scss';
+
+#app {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+}

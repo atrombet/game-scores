@@ -1,0 +1,42 @@
+button {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  padding: var(--sm) var(--md);
+  color: var(--white);
+  background-color: var(--accent);
+  border: none;
+  border-radius: var(--xs);
+  font-size: var(--font-size-small);
+  height: 37px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--xs);
+
+  &[small] {
+    height: 29px;
+    padding: var(--xs) var(--md);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &[flat] {
+    background-color: transparent;
+    color: var(--accent);
+  }
+
+  &[outlined] {
+    background-color: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+
+  & i {
+    font-size: var(--icon-size-small);
+    height: var(--icon-size-small);
+    width: var(--icon-size-small);
+  }
+}

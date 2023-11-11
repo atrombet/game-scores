@@ -1,0 +1,21 @@
+.page {
+  max-width: 70vw;
+  margin: auto;
+  overflow-y: auto;
+  padding: var(--xl);
+
+  &__backToHome {
+    display: flex;
+    align-items: center;
+    gap: var(--xs);
+    font-size: var(--font-size-small);
+    color: var(--accent);
+    padding-top: var(--lg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .page {
+    max-width: 100vw;
+  }
+}
