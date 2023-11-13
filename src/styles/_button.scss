@@ -13,6 +13,10 @@ button {
   align-items: center;
   gap: var(--xs);
 
+  &[dark] {
+    background-color: var(--accent-dark);
+  }
+
   &[small] {
     height: 29px;
     padding: var(--xs) var(--md);
@@ -26,12 +30,18 @@ button {
   &[flat] {
     background-color: transparent;
     color: var(--accent);
+    padding: 0;
   }
 
   &[outlined] {
     background-color: transparent;
     color: var(--accent);
     border: 2px solid var(--accent);
+
+    &[dark] {
+      color: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
   }
 
   & i {

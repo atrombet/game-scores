@@ -175,6 +175,11 @@
   display: flex;
   justify-content: space-around;
 }
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.flex-shrink-1 { flex-shrink: 1; }
 .justify-center { justify-content: center; }
 .justify-end { justify-content: end; }
 .align-center { align-items: center; }
@@ -194,7 +199,10 @@
 /* Color Utilities */
 .red { color: #f44336; }
 .white { color: #FFFFFF; }
+.color-accent { color: var(--accent); }
+.color-accent-dark { color: var(--accent-dark); }
 
 /* Text Utilities */
 .italic { font-style: italic; }
+.underline { text-decoration: underline; }
 .text-center { text-align: center; }

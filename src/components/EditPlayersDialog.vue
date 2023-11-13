@@ -1,24 +1,30 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const show = ref(false)
+const dialog = ref(null)
 const players = ref([])
 const newPlayer = ref('')
 const input = ref(null)
 
-defineProps({
+const canAddPlayer = computed(() =>
+  props.maxPlayers ? players.value.length < props.maxPlayers : true
+)
+
+const props = defineProps({
   title: {
     type: String,
     default: 'Players'
-  }
+  },
+  maxPlayers: Number
 })
 
 const open = () => {
-  show.value = true
+  dialog.value.showModal()
+  input.value.focus()
 }
 
 const close = () => {
-  show.value = false
+  dialog.value.close()
 }
 
 const submit = () => {
@@ -37,12 +43,19 @@ defineExpose({ open, close })
 </script>
 
 <template>
-  <dialog :open="show">
-    <button flat @click="close"><i>close</i></button>
-    <h2>{{ title }}</h2>
+  <dialog ref="dialog">
+    <header class="flex-between">
+      <h2 class="mt-xs">{{ title }}</h2>
+      <button flat @click="close"><i>close</i></button>
+    </header>
+    <div v-if="maxPlayers" class="mb-lg">
+      Add up to {{ maxPlayers }} {{ title.toLocaleLowerCase() }} for this game.
+    </div>
     <div class="flex gap-sm">
       <input ref="input" v-model="newPlayer" placeholder="Name" @keydown.enter="addPlayer" />
-      <button @click="addPlayer"><i>person_add</i></button>
+      <button @click="addPlayer" :disabled="!canAddPlayer">
+        <i>person_add</i>
+      </button>
     </div>
     <div class="pv-lg">
       <template v-if="players.length">

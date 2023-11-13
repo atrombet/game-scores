@@ -1,5 +1,14 @@
 a,
 a:-webkit-any-link {
-  color: unset;
-  text-decoration: unset;
+  color: var(--accent-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--xs);
+
+  & i {
+    font-size: var(--font-size-small);
+    height: var(--font-size-small);
+    width: var(--font-size-small);
+    text-decoration: none;
+  }
 }
