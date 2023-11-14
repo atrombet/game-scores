@@ -19,6 +19,18 @@ const totalScores = computed(() => {
   }, {})
 })
 
+const winner = computed(() => {
+  const scores = Object.values(totalScores.value)
+  const maxScore = Math.max(...scores)
+  if (maxScore >= 20000) {
+    const winners = Object.keys(totalScores.value).filter(
+      (name) => totalScores.value[name] === maxScore
+    )
+    return winners.length === 1 ? winners[0] : null
+  }
+  return null
+})
+
 const openPlayersDialog = () => editPlayersDialog.value.open(players.value || undefined)
 
 const updatePlayers = (newPlayers) => {
@@ -27,6 +39,7 @@ const updatePlayers = (newPlayers) => {
 }
 
 const openScoreDialog = (roundIndex) => {
+  if (winner.value) return
   scoreDialog.value.open(
     players.value.map((p) => ({
       name: p.name,
@@ -108,7 +121,10 @@ onMounted(() => {
     <div v-if="players.length" class="text-center">
       <div class="flex-around mb-xl">
         <div v-for="player in players" :key="player.name">
-          <h3 class="underline">{{ player.name }}</h3>
+          <h3 v-if="winner === player.name">
+            🎉 <span class="underline">{{ player.name }}</span> 🎉
+          </h3>
+          <h3 v-else class="underline">{{ player.name }}</h3>
           <template v-if="player.scores">
             <h4 class="mb-xs">Total: {{ totalScores[player.name] }}</h4>
             <div>To lay down: {{ laydown(totalScores[player.name]) }}</div>
@@ -124,7 +140,7 @@ onMounted(() => {
           </template>
         </div>
       </div>
-      <button @click="openScoreDialog">Score round</button>
+      <button @click="openScoreDialog" :disabled="!!winner">Score round</button>
       <KanastaScoreDialog ref="scoreDialog" @updateScores="scoreRound" />
     </div>
     <div v-else>Add teams to begin.</div>
