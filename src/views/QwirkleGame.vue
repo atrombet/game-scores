@@ -45,6 +45,13 @@ const recordScore = () => {
   scoreInput.value.focus()
 }
 
+const editScore = (score, playerName, index) => {
+  const editedScore = prompt('edit score', score)
+  if (editedScore !== null || editedScore !== '') {
+    players.value.find((p) => p.name === playerName).scores[index] = Number(editedScore)
+  }
+}
+
 onMounted(() => {
   if (!players.value.length) openPlayersDialog()
 })
@@ -74,6 +81,7 @@ onMounted(() => {
               v-for="(score, i) in player.scores"
               :key="`${player.name}-score-${i}`"
               class="pv-xs"
+              @click="editScore(score, player.name, i)"
             >
               {{ score }}
             </div>
@@ -92,7 +100,9 @@ onMounted(() => {
         v-model="newScore"
         @keydown.enter="recordScore"
       />
-      <button @click="recordScore" :disabled="!(newScore >= 0)"><i>add</i></button>
+      <button @click="recordScore" :disabled="!(newScore >= 0)">
+        <i>add</i>
+      </button>
     </div>
   </main>
 </template>
