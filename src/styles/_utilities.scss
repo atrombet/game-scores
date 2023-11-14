@@ -206,3 +206,6 @@
 .italic { font-style: italic; }
 .underline { text-decoration: underline; }
 .text-center { text-align: center; }
+.font-size-sm { font-size: var(--font-size-small); }
+.font-size-md { font-size: var(--font-size); }
+.font-size-lg { font-size: var(--font-size-large); }

@@ -19,7 +19,7 @@ const totalScores = computed(() => {
   }, {})
 })
 
-const openPlayersDialog = () => editPlayersDialog.value.open()
+const openPlayersDialog = () => editPlayersDialog.value.open(players.value || undefined)
 
 const updatePlayers = (newPlayers) => {
   players.value = newPlayers.map((p) => ({ ...p, scores: [] }))
