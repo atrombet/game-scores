@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { EditPlayersDialog, GoHomeButton } from '@/components'
+import { NewGameButton } from '../components'
 
 const players = ref([])
 const editPlayersDialog = ref(null)
@@ -24,7 +25,8 @@ const totalScores = computed(() => {
 const openPlayersDialog = () => editPlayersDialog.value.open()
 
 const updatePlayers = (newPlayers) => {
-  players.value = newPlayers.map((p) => ({ ...p, scores: [], newScore: ref(null) }))
+  players.value = newPlayers.map((p) => ({ ...p, scores: [] }))
+  saveLocal()
   selectedPlayerIndex.value = 0
 }
 
@@ -42,6 +44,7 @@ const recordScore = () => {
   } else {
     selectedPlayerIndex.value = 0
   }
+  saveLocal()
   scoreInput.value.focus()
 }
 
@@ -50,22 +53,41 @@ const editScore = (score, playerName, index) => {
   if (editedScore !== null || editedScore !== '') {
     players.value.find((p) => p.name === playerName).scores[index] = Number(editedScore)
   }
+  saveLocal()
+}
+
+const saveLocal = () => {
+  localStorage.setItem('qwirkleData', JSON.stringify(players.value))
+}
+
+const startNewGame = () => {
+  players.value = []
+  openPlayersDialog()
 }
 
 onMounted(() => {
+  if (localStorage.getItem('qwirkleData')) {
+    selectedPlayerIndex.value = 0
+    players.value = JSON.parse(localStorage.getItem('qwirkleData'))
+  }
   if (!players.value.length) openPlayersDialog()
 })
 </script>
 
 <template>
   <main class="page">
-    <GoHomeButton />
-    <header class="flex-between align-center mt-xs mb-md">
-      <h1 class="ma-0">Qwirkle</h1>
-      <button small outlined dark :disabled="scoresExist" @click="openPlayersDialog">
-        <i>group_add</i>
-        <span> {{ players.length ? 'Edit' : 'Add' }} players</span>
-      </button>
+    <header class="mb-md">
+      <div class="flex-between mb-md">
+        <GoHomeButton />
+        <NewGameButton dataKey="qwirkleData" @newGame="startNewGame" />
+      </div>
+      <div class="flex-between align-center">
+        <h1 class="ma-0">Qwirkle</h1>
+        <button small outlined dark :disabled="scoresExist" @click="openPlayersDialog">
+          <i>group_add</i>
+          <span> {{ players.length ? 'Edit' : 'Add' }} players</span>
+        </button>
+      </div>
     </header>
     <EditPlayersDialog ref="editPlayersDialog" :maxPlayers="4" @updatePlayers="updatePlayers" />
 
