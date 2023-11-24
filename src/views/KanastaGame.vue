@@ -104,7 +104,7 @@ onMounted(() => {
         <NewGameButton dataKey="kanastaData" @newGame="startNewGame" />
       </div>
       <div class="flex-between align-center">
-        <h1 class="ma-0">Kanasta</h1>
+        <h1 class="ma-0">Canasta</h1>
         <button small outlined dark :disabled="scoresExist" @click="openPlayersDialog">
           <i>group_add</i>
           <span> {{ players.length ? 'Edit' : 'Add' }} teams</span>
@@ -134,7 +134,7 @@ onMounted(() => {
               @click="openScoreDialog(i)"
             >
               <h5>Round {{ i + 1 }}</h5>
-              <div>Kanastas: {{ score.kanastaPoints }}</div>
+              <div>Canasta: {{ score.kanastaPoints }}</div>
               <div>Cards: {{ score.cardPoints }}</div>
             </div>
           </template>

@@ -52,7 +52,7 @@ defineExpose({ open, close })
           class="pointInput"
           type="number"
           inputmode="numeric"
-          placeholder="Kanasta points"
+          placeholder="Canasta points"
           v-model="player.kanastaPoints"
         />
         <input

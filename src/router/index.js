@@ -10,8 +10,8 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/kanasta',
-      name: 'kanasta',
+      path: '/canasta',
+      name: 'canasta',
       component: () => import('../views/KanastaGame.vue')
     },
     {

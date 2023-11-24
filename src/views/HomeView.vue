@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router'
   <main class="page">
     <h1>Select a game</h1>
     <div class="flex-column gap-lg">
-      <RouterLink to="/kanasta">Kanasta</RouterLink>
+      <RouterLink to="/canasta">Canasta</RouterLink>
       <RouterLink to="/qwirkle">Qwirkle</RouterLink>
     </div>
   </main>
