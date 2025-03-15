@@ -34,23 +34,18 @@ const emit = defineEmits(['increment', 'decrement'])
   background-position: center;
 
   &.authority {
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
-    // max-width: 539px;
     background-image: url(./images/authority-icon.png);
   }
 
   &.combat {
-    // width: 70%;
-    // max-width: 475px;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url(./images/combat-icon.png);
   }
 
   &.trade {
-    // width: 70%;
-    // max-width: 475px;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url(./images/trade-icon.png);
@@ -66,6 +61,7 @@ const emit = defineEmits(['increment', 'decrement'])
     top: 0;
     bottom: 0;
     font-size: 3rem;
+    touch-action: manipulation;
   }
 
   & div {
