@@ -40,7 +40,7 @@ const nextTurn = () => {
 
 <style lang="scss">
 .starRealms {
-  height: calc(100vh - 2 * var(--xl));
+  height: calc(90vh - 2 * var(--xl));
   max-width: 400px;
   margin: 0 auto;
   background-color: var(--gray-darkest);
