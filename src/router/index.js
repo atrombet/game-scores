@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/qwirkle',
       name: 'qwirkle',
       component: () => import('../views/QwirkleGame.vue')
+    },
+    {
+      path: '/star-realms',
+      name: 'star-realms',
+      component: () => import('../views/StarRealmsGame.vue')
     }
   ]
 })
