@@ -23,6 +23,10 @@ body {
   height: 100%;
   width: 100%;
   background-color: var(--bg-color);
+
+  &:has(.dark-mode) {
+    background-color: var(--gray-darkest);
+  }
 }
 
 // Custom component styles
@@ -36,4 +40,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
+
+  &:has(.starRealms) {
+    height: 100vh;
+  }
 }
