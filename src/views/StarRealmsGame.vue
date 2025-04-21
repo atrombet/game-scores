@@ -28,7 +28,7 @@ const nextTurn = () => {
     <div class="starRealms__grid" :class="{ smaller: showEnemy }">
       <StarRealmsCounter
         v-if="showEnemy"
-        type="enemy-authority"
+        type="authority"
         @decrement="enemyAuthority--"
         :value="enemyAuthority"
         @increment="enemyAuthority++"
@@ -57,13 +57,14 @@ const nextTurn = () => {
   margin: 0 auto;
   background-color: var(--gray-darkest);
   color: var(--white);
+  overflow: hidden;
 
   &__grid {
     display: grid;
     grid-template-rows: auto;
     gap: var(--xl);
     height: calc(100% - 2 * var(--xl));
-    max-height: 900px;
+    max-height: 95vh;
   }
 }
 </style>

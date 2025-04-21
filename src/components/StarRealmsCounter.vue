@@ -1,13 +1,18 @@
 <script setup>
 defineProps({
   value: Number,
-  type: String // authority, trade, combat, enemy-authority
+  type: String, // authority, trade, combat
+  isEnemy: Boolean
 })
 const emit = defineEmits(['increment', 'decrement'])
 </script>
 
 <template>
-  <div class="starRealmsCounter" :class="type">
+  <div
+    class="starRealmsCounter"
+    :class="{ enemy: isEnemy }"
+    :style="{ backgroundImage: `url(./images/${type}-icon.png)` }"
+  >
     <button @click="emit('decrement')" class="left"><i>arrow_left</i></button>
     <div>{{ value }}</div>
     <button @click="emit('increment')" class="right"><i>arrow_right</i></button>
@@ -32,29 +37,12 @@ const emit = defineEmits(['increment', 'decrement'])
   position: relative;
   background-size: cover;
   background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 
-  &.enemy-authority {
+  &.enemy {
     border: var(--error) 2px solid;
     border-radius: 0.5rem;
-  }
-
-  &.authority,
-  &.enemy-authority {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url(./images/authority-icon.png);
-  }
-
-  &.combat {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url(./images/combat-icon.png);
-  }
-
-  &.trade {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url(./images/trade-icon.png);
   }
 
   & button {
