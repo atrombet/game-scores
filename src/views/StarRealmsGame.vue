@@ -29,6 +29,7 @@ const nextTurn = () => {
       <StarRealmsCounter
         v-if="showEnemy"
         type="authority"
+        :isEnemy="true"
         @decrement="enemyAuthority--"
         :value="enemyAuthority"
         @increment="enemyAuthority++"
