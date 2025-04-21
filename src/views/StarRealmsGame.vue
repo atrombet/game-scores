@@ -5,6 +5,8 @@ import { GoHomeButton, StarRealmsCounter } from '@/components'
 const trade = ref(0)
 const combat = ref(0)
 const authority = ref(50)
+const enemyAuthority = ref(50)
+const showEnemy = ref(false)
 
 const nextTurn = () => {
   trade.value = 0
@@ -17,10 +19,20 @@ const nextTurn = () => {
     <header class="mb-md">
       <div class="flex-between mb-md">
         <GoHomeButton />
-        <button flat @click="nextTurn"><i>restart_alt</i>Next turn</button>
+        <div class="flex-column align-end">
+          <button flat @click="nextTurn"><i>restart_alt</i>Next turn</button>
+          <button flat @click="showEnemy = !showEnemy">Toggle enemy</button>
+        </div>
       </div>
     </header>
-    <div class="starRealms__grid">
+    <div class="starRealms__grid" :class="{ smaller: showEnemy }">
+      <StarRealmsCounter
+        v-if="showEnemy"
+        type="enemy-authority"
+        @decrement="enemyAuthority--"
+        :value="enemyAuthority"
+        @increment="enemyAuthority++"
+      />
       <StarRealmsCounter
         type="authority"
         @decrement="authority--"
@@ -48,10 +60,9 @@ const nextTurn = () => {
 
   &__grid {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: auto;
     gap: var(--xl);
     height: calc(100% - 2 * var(--xl));
-    // height: 100%;
     max-height: 900px;
   }
 }
