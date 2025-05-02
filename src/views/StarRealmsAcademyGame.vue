@@ -28,12 +28,18 @@ const resetGame = () => {
         :value="authority"
         @increment="authority++"
       />
-      <StarRealmsCounter type="trade" @decrement="trade--" :value="trade" @increment="trade++" />
+      <StarRealmsCounter
+        type="trade"
+        @decrement="trade--"
+        :value="trade"
+        @increment="trade++"
+        :max="8"
+      />
     </div>
   </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .starRealms {
   height: calc(90vh - 3 * var(--xl));
   max-width: 400px;
@@ -45,9 +51,8 @@ const resetGame = () => {
   &__grid {
     display: grid;
     grid-template-rows: auto;
-    gap: var(--xl);
     height: calc(100% - 2 * var(--xl));
-    max-height: 95vh;
+    max-height: 50vh;
   }
 }
 </style>

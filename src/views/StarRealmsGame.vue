@@ -12,6 +12,13 @@ const nextTurn = () => {
   trade.value = 0
   combat.value = 0
 }
+
+const resetGame = () => {
+  trade.value = 0
+  combat.value = 0
+  authority.value = 50
+  enemyAuthority.value = 50
+}
 </script>
 
 <template>
@@ -19,10 +26,13 @@ const nextTurn = () => {
     <header class="mb-md">
       <div class="flex-between mb-md">
         <GoHomeButton />
-        <div class="flex-column align-end">
-          <button flat @click="nextTurn"><i>restart_alt</i>Next turn</button>
-          <button flat @click="showEnemy = !showEnemy">Toggle enemy</button>
-        </div>
+      </div>
+      <div class="flex-between align-center gap-xl">
+        <button flat @click="nextTurn"><i>forward</i>Next turn</button>
+        <button flat @click="showEnemy = !showEnemy">
+          <i>sentiment_extremely_dissatisfied</i>Toggle enemy
+        </button>
+        <button flat @click="resetGame"><i>restart_alt</i>Reset game</button>
       </div>
     </header>
     <div class="starRealms__grid" :class="{ smaller: showEnemy }">
@@ -51,21 +61,20 @@ const nextTurn = () => {
   </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .starRealms {
   height: calc(90vh - 2 * var(--xl));
   max-width: 400px;
   margin: 0 auto;
   background-color: var(--gray-darkest);
   color: var(--white);
-  overflow: hidden;
+  overflow-y: hidden;
 
   &__grid {
     display: grid;
     grid-template-rows: auto;
-    gap: var(--xl);
-    height: calc(100% - 2 * var(--xl));
-    max-height: 95vh;
+    height: calc(90% - 2 * var(--xl));
+    overflow: hidden;
   }
 }
 </style>
