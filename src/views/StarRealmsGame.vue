@@ -74,7 +74,6 @@ const resetGame = () => {
     display: grid;
     grid-template-rows: auto;
     height: calc(90% - 2 * var(--xl));
-    overflow: hidden;
   }
 }
 </style>
