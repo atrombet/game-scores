@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/star-realms',
       name: 'star-realms',
       component: () => import('../views/StarRealmsGame.vue')
+    },
+    {
+      path: '/star-realms-academy',
+      name: 'star-realms-academy',
+      component: () => import('../views/StarRealmsAcademyGame.vue')
     }
   ]
 })

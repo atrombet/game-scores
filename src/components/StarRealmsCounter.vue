@@ -39,6 +39,7 @@ const emit = defineEmits(['increment', 'decrement'])
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  max-height: 24vh;
 
   &.enemy {
     border: var(--error) 2px solid;
