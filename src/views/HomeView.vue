@@ -10,6 +10,7 @@ import { RouterLink } from 'vue-router'
       <RouterLink to="/qwirkle">Qwirkle</RouterLink>
       <RouterLink to="/star-realms">Star Realms</RouterLink>
       <RouterLink to="/star-realms-academy">Star Realms Academy</RouterLink>
+      <RouterLink to="/yahtzee">Yahtzee</RouterLink>
     </div>
   </main>
 </template>
