@@ -3,7 +3,7 @@ import { onMounted, ref, computed } from 'vue'
 import { EditPlayersDialog, GoHomeButton, NewGameButton, YahtzeeScoreDialog } from '@/components'
 
 const DATA_KEY = 'yahtzeeData'
-const BLACKOUT_GAMES = 5
+const BLACKOUT_GAMES = 6
 const UPPER_BONUS = 35
 const UPPER_BONUS_THRESHOLD = 63
 
@@ -161,7 +161,10 @@ onMounted(() => {
   try {
     const saved = JSON.parse(localStorage.getItem(DATA_KEY))
     if (saved?.players) {
-      players.value = saved.players
+      players.value = saved.players.map((player) => ({
+        ...player,
+        games: emptyGames().map((game, g) => player.games?.[g] || game)
+      }))
       blackout.value = saved.blackout !== false
     }
   } catch {
@@ -198,7 +201,7 @@ onMounted(() => {
           :disabled="scoresExist && !blackout"
           @click="setBlackout(true)"
         >
-          Blackout (5 games)
+          Blackout ({{ BLACKOUT_GAMES }} games)
         </button>
         <button
           small
