@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router'
     <h1>Select a game</h1>
     <div class="flex-column gap-lg">
       <RouterLink to="/canasta">Canasta</RouterLink>
-      <RouterLink to="/qwirkle">Qwirkle</RouterLink>
+      <RouterLink to="/tally">Score Tally</RouterLink>
       <RouterLink to="/star-realms">Star Realms</RouterLink>
       <RouterLink to="/star-realms-academy">Star Realms Academy</RouterLink>
       <RouterLink to="/yahtzee">Yahtzee</RouterLink>
