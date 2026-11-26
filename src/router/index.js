@@ -15,9 +15,13 @@ const router = createRouter({
       component: () => import('../views/KanastaGame.vue')
     },
     {
+      path: '/tally',
+      name: 'tally',
+      component: () => import('../views/ScoreTallyGame.vue')
+    },
+    {
       path: '/qwirkle',
-      name: 'qwirkle',
-      component: () => import('../views/QwirkleGame.vue')
+      redirect: '/tally'
     },
     {
       path: '/star-realms',
