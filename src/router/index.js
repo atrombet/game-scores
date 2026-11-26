@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/star-realms-academy',
       name: 'star-realms-academy',
       component: () => import('../views/StarRealmsAcademyGame.vue')
+    },
+    {
+      path: '/yahtzee',
+      name: 'yahtzee',
+      component: () => import('../views/YahtzeeGame.vue')
     }
   ]
 })
