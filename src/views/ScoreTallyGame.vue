@@ -191,7 +191,9 @@ onMounted(() => {
   overflow: hidden;
 
   &__scroll {
-    flex: 1;
+    // Only as tall as the scores, so the entry sits right under the totals
+    // until the columns fill the screen.
+    flex: 0 1 auto;
     min-height: 0;
     overflow: auto;
   }
