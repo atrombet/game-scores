@@ -40,10 +40,22 @@ const LOWER = [
     range: diceTotal,
     options: [0]
   },
-  { key: 'fullHouse', label: 'Full house', hint: 'Scores 25', options: [25, 0] },
-  { key: 'smStraight', label: 'Sm straight', hint: 'Sequence of 4, scores 30', options: [30, 0] },
-  { key: 'lgStraight', label: 'Lg straight', hint: 'Sequence of 5, scores 40', options: [40, 0] },
-  { key: 'yahtzee', label: 'Yahtzee', hint: '5 of a kind, scores 50', options: [50, 0] },
+  { key: 'fullHouse', fixed: 25, label: 'Full house', hint: 'Scores 25', options: [25, 0] },
+  {
+    key: 'smStraight',
+    fixed: 30,
+    label: 'Sm straight',
+    hint: 'Sequence of 4, scores 30',
+    options: [30, 0]
+  },
+  {
+    key: 'lgStraight',
+    fixed: 40,
+    label: 'Lg straight',
+    hint: 'Sequence of 5, scores 40',
+    options: [40, 0]
+  },
+  { key: 'yahtzee', fixed: 50, label: 'Yahtzee', hint: '5 of a kind, scores 50', options: [50, 0] },
   { key: 'chance', label: 'Chance', hint: 'Total of all dice', range: diceTotal, options: [0] }
 ]
 
@@ -130,7 +142,13 @@ const setBlackout = (value) => {
 }
 
 const openScoreDialog = (category, gameIndex) => {
-  scoreDialog.value.open(category, gameIndex, selectedPlayer.value.games[gameIndex][category.key])
+  const value = selectedPlayer.value.games[gameIndex][category.key]
+  // Boxes worth a set amount fill in on the first tap; tap again to scratch or clear.
+  if (category.fixed && value == null) {
+    setScore({ key: category.key, gameIndex, score: category.fixed })
+    return
+  }
+  scoreDialog.value.open(category, gameIndex, value)
 }
 
 const setScore = ({ key, gameIndex, score }) => {
