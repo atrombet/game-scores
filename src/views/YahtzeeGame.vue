@@ -125,7 +125,6 @@ const updatePlayers = (newPlayers) => {
 }
 
 const setBlackout = (value) => {
-  if (scoresExist.value) return
   blackout.value = value
   saveLocal()
 }
@@ -143,6 +142,10 @@ const setScore = ({ key, gameIndex, score }) => {
   }
   saveLocal()
 }
+
+// A required box given up for zero. A Yahtzee bonus of 0 is just "none".
+const isScratched = (category, gameIndex) =>
+  !category.optional && selectedPlayer.value.games[gameIndex][category.key] === 0
 
 const saveLocal = () => {
   localStorage.setItem(
@@ -194,23 +197,11 @@ onMounted(() => {
 
     <template v-if="players.length">
       <div class="flex gap-sm align-center mb-md">
-        <button
-          small
-          dark
-          :outlined="blackout ? null : true"
-          :disabled="scoresExist && !blackout"
-          @click="setBlackout(true)"
-        >
+        <button small dark :outlined="blackout ? null : true" @click="setBlackout(true)">
           Blackout ({{ BLACKOUT_GAMES }} games)
         </button>
-        <button
-          small
-          dark
-          :outlined="blackout ? true : null"
-          :disabled="scoresExist && blackout"
-          @click="setBlackout(false)"
-        >
-          Single game
+        <button small dark :outlined="blackout ? true : null" @click="setBlackout(false)">
+          1 game
         </button>
       </div>
 
@@ -248,9 +239,10 @@ onMounted(() => {
               v-for="(summary, g) in selectedSummaries"
               :key="g"
               class="yahtzee__cell"
+              :class="{ 'yahtzee__cell--scratched': isScratched(category, g) }"
               @click="openScoreDialog(category, g)"
             >
-              {{ selectedPlayer.games[g][category.key] }}
+              {{ isScratched(category, g) ? '✕' : selectedPlayer.games[g][category.key] }}
             </td>
           </tr>
           <tr class="yahtzee__summary">
@@ -275,9 +267,10 @@ onMounted(() => {
               v-for="(summary, g) in selectedSummaries"
               :key="g"
               class="yahtzee__cell"
+              :class="{ 'yahtzee__cell--scratched': isScratched(category, g) }"
               @click="openScoreDialog(category, g)"
             >
-              {{ selectedPlayer.games[g][category.key] }}
+              {{ isScratched(category, g) ? '✕' : selectedPlayer.games[g][category.key] }}
             </td>
           </tr>
           <tr class="yahtzee__summary">
@@ -385,6 +378,11 @@ onMounted(() => {
   &__cell {
     cursor: pointer;
     font-size: var(--font-size-large);
+
+    &--scratched {
+      color: var(--error);
+      background-color: var(--error-trans);
+    }
 
     &:empty {
       background-color: var(--bg-color);

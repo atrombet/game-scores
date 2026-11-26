@@ -74,7 +74,8 @@ defineExpose({ open, close })
           dark
           @click="submit(option)"
         >
-          {{ option === 0 && !category.optional ? 'Scratch (0)' : option }}
+          <template v-if="option === 0 && !category.optional"><i>close</i>Scratch</template>
+          <template v-else>{{ option }}</template>
         </button>
       </div>
 
