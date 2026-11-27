@@ -181,7 +181,8 @@ onMounted(() => {
           v-model="newScore"
           @keydown.enter="recordScore"
         />
-        <button @click="recordScore" :disabled="!isScore(newScore)">
+        <!-- mousedown.prevent keeps focus in the score box, so a phone keyboard stays open. -->
+        <button @mousedown.prevent @click="recordScore" :disabled="!isScore(newScore)">
           <i>add</i>
         </button>
       </div>
