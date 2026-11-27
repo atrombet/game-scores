@@ -34,7 +34,7 @@ const updatePlayers = (newPlayers) => {
 const setSelectedPlayer = (index) => {
   selectedPlayerIndex.value = index
   newScore.value = null
-  scoreInput.value.focus()
+  scoreInput.value.focus({ preventScroll: true })
 }
 
 const recordScore = () => {
@@ -43,13 +43,24 @@ const recordScore = () => {
   newScore.value = null
   selectedPlayerIndex.value = (selectedPlayerIndex.value + 1) % players.value.length
   saveLocal()
-  scoreInput.value.focus()
-  nextTick(() => {
-    scrollArea.value.scrollTop = scrollArea.value.scrollHeight
-    scrollArea.value
-      .querySelector('.tally__name--selected')
-      ?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
-  })
+  scoreInput.value.focus({ preventScroll: true })
+  nextTick(showLatestScore)
+}
+
+// Keep the newest scores and the next player's column on screen. The scroll
+// position is set directly: scrollIntoView on the pinned name row sends some
+// browsers back to the top of the list.
+const showLatestScore = () => {
+  const area = scrollArea.value
+  area.scrollTop = area.scrollHeight
+  const name = area.querySelector('.tally__name--selected')?.getBoundingClientRect()
+  if (!name) return
+  const view = area.getBoundingClientRect()
+  if (name.left < view.left) {
+    area.scrollLeft -= view.left - name.left
+  } else if (name.right > view.right) {
+    area.scrollLeft += name.right - view.right
+  }
 }
 
 const editScore = (player, index) => {
